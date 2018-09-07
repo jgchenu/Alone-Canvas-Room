@@ -23,7 +23,7 @@ npm run build --report
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 小程序已经上线，扫小程序码进行体验<br/>
-![image](https://raw.githubusercontent.com/jgchenu/Online-Canvas-Room/master/logo.jpg)
+![image](https://raw.githubusercontent.com/jgchenu/Alone-Canvas-Room/master/logo.jpg)
 
 
 ## 开源协议

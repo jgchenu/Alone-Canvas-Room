@@ -4,7 +4,7 @@
   <canvas  canvas-id="show" 
    :style="{'height'
    :height+'rpx','width'
-   :width+'rpx','left':(offsetX+1)+'rpx','top':(offsetY)+'rpx'}" 
+   :width+'rpx','left':(offsetX)+'rpx','top':(offsetY)+'rpx'}" 
    disable-scroll="true"  
    />
    <canvas 
@@ -193,16 +193,7 @@ export default {
       if (this.chosen === "draw") {
         this.drawCanvas(this.drawWidth, this.color, this.drawArr);
       } else if (this.chosen === "move") {
-        this.sendMessage("speak", {
-          "room-id": this.roomId,
-          action: 1,
-          data: {
-            type: 2,
-            data: {
-              offsetX: this.offsetX
-            }
-          }
-        });
+
       } else if (this.chosen === "eraser") {
         this.drawCanvas(this.eraserWidth, "#ffffff", this.drawArr);
       }
