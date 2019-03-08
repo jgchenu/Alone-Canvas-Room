@@ -28,14 +28,14 @@
     </picker>
 
     <div v-for="(item,index) in types" :key="index" :class="{chosen:item==chosen}" class="type" @click="choseType(index)">
-      <img :src="'http://test.jgchen.xin/canvas/'+item+'.png'" :alt="item">
+      <img :src="'https://raw.githubusercontent.com/jgchenu/staticAssets/master/'+item+'.png'" :alt="item">
     </div>
 
 
   </aside>
   <div v-if="identity==='join'" class="tip">
     <p>保存画板 
-    <img :src="'http://test.jgchen.xin/canvas/save.png'"
+    <img :src="'https://raw.githubusercontent.com/jgchenu/staticAssets/master/save.png'"
     :alt="'save'"
     @click="choseType(4)">
     </p>
