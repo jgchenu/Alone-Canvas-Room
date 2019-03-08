@@ -42,8 +42,10 @@
   </div>
 </div>
 </template>
+
 <script>
-var util = require("../../utils/index.js");
+import util from '@/utils/index.js'
+
 export default {
   mounted() {
     //调用监听服务器返回
@@ -338,7 +340,9 @@ export default {
     }
   }
 };
-</script><style scoped lang='scss'>
+</script>
+
+<style scoped lang='less'>
 page {
   background: rgba(153, 204, 255, 0.1);
   transform: translateZ(0);

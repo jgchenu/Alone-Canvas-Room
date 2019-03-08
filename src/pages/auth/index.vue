@@ -1,14 +1,14 @@
 <template>
     <div class="loginPage">
             <p>点击允许授权照片权限</p>
-            <img src="http://test.jgchen.xin/canvas/logo.jpg" alt="logo">
+            <img src="https://raw.githubusercontent.com/jgchenu/Alone-Canvas-Room/master/logo.jpg" alt="logo">
             <button @opensetting="onGetSetting" open-type="openSetting" class="loginButton">允许</button>
             
     </div>
 </template>
 
 <script>
-var util = require("../../utils/index.js");
+import util from '@/utils/index.js'
 export default {
   methods: {
     onGetSetting(event) {
@@ -30,7 +30,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .loginPage {
   height: 100%;
   width: 100%;
