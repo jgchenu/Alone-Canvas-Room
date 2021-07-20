@@ -1,25 +1,25 @@
 <template>
 <div class="index">
-  
-  <canvas  canvas-id="show" 
+
+  <canvas  canvas-id="show"
    :style="{'height'
    :height+'rpx','width'
-   :width+'rpx','left':(offsetX)+'rpx','top':(offsetY)+'rpx'}" 
-   disable-scroll="true"  
+   :width+'rpx','left':(offsetX)+'rpx','top':(offsetY)+'rpx'}"
+   disable-scroll="true"
    />
-   <canvas 
-   canvas-id="Canvas" 
+   <canvas
+   canvas-id="Canvas"
    :style="{'height'
    :height+'rpx','width'
-   :width+'rpx','left':offsetX+'rpx','top':offsetY+'rpx'}" 
-   disable-scroll="true"  
-   @touchstart="touchStart" 
+   :width+'rpx','left':offsetX+'rpx','top':offsetY+'rpx'}"
+   disable-scroll="true"
+   @touchstart="touchStart"
    @touchmove="touchMove"
    @touchend="touchEnd"
-   :ref="'canvas'" class="canvas" 
+   :ref="'canvas'" class="canvas"
    />
 
-  <aside class="types">
+  <footer class="types">
 
     <picker mode="multiSelector" @change="bindMultiPickerChange" :value="multiIndex" :range="multiArray"  >
         <div class="picker type" :style="{'font-size':(computedDrawWidth)+'rpx','color':color}" style="border-radiu:50%;" >
@@ -28,18 +28,10 @@
     </picker>
 
     <div v-for="(item,index) in types" :key="index" :class="{chosen:item==chosen}" class="type" @click="choseType(index)">
-      <img :src="'https://raw.githubusercontent.com/jgchenu/staticAssets/master/'+item+'.png'" :alt="item">
+      <img :src="typeImageMap[item]" :alt="item">
     </div>
 
-
-  </aside>
-  <div v-if="identity==='join'" class="tip">
-    <p>保存画板 
-    <img :src="'https://raw.githubusercontent.com/jgchenu/staticAssets/master/save.png'"
-    :alt="'save'"
-    @click="choseType(4)">
-    </p>
-  </div>
+  </footer>
 </div>
 </template>
 
@@ -88,6 +80,13 @@ export default {
       offsetY: 0,
       timer: null,
       types: ["draw", "move", "eraser", "clear", "save"],
+      typeImageMap: {
+        draw: 'https://api2.mubu.com/v3/document_image/027cc06e-1397-48e6-adf4-e771d5ede9e4-2898889.jpg',
+        move:'https://api2.mubu.com/v3/document_image/57c906da-58c3-4241-8fa0-9b29f59d5c81-2898889.jpg',
+        eraser: 'https://api2.mubu.com/v3/document_image/147c5e88-71c1-4953-945a-1e4e8cbe202a-2898889.jpg',
+        clear:'https://api2.mubu.com/v3/document_image/b74052a0-e061-45a5-8c12-3d21816867f1-2898889.jpg',
+        save:'https://api2.mubu.com/v3/document_image/19771cb2-f4e1-43c4-bdbc-97b188945e43-2898889.jpg'
+      },
       chosen: "draw",
       time: 0,
       roomId: "",
@@ -107,7 +106,7 @@ export default {
     getAuth() {
       wx.getSetting({
         success: res => {
-          if ( 
+          if (
             !res.authSetting["scope.writePhotosAlbum"]
           ) {
             wx.navigateTo({
@@ -347,6 +346,7 @@ page {
   background: rgba(153, 204, 255, 0.1);
   transform: translateZ(0);
   position: relative;
+
   .canvas,
   .show {
     box-shadow: #aaa 0 0 10px;
@@ -356,10 +356,12 @@ page {
     border-left: 1rpx solid #bfccdc;
     border-right: 1rpx solid #bfccdc;
   }
+
   .show {
     border-color: #ffffff;
     z-index: 1;
   }
+
   .types {
     width: 100%;
     position: absolute;
@@ -389,6 +391,7 @@ page {
       background-color: #3BACF9;
     }
   }
+
   .tip {
     width: 2880rpx;
     background: #bfccdc;
@@ -397,6 +400,7 @@ page {
     justify-content: flex-start;
     align-items: center;
     height: 130rpx;
+
     p {
       width: 750rpx;
       height: 130rpx;
@@ -411,6 +415,7 @@ page {
         height: 40rpx;
       }
     }
+
   }
 }
 </style>
