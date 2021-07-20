@@ -47,6 +47,8 @@ export default {
     this.ctx.setStrokeStyle(this.color);
     this.ctx.setLineWidth(2);
     this.ctx.setLineCap("round"); // 让线条圆润
+    this.height = wx.getSystemInfoSync().windowHeight * 2 - 300,
+    this.width = wx.getSystemInfoSync().windowWidth * 4
   },
   onLoad(option) {
   },
@@ -74,8 +76,8 @@ export default {
       prevPosition: [0, 0],
       startX: 0,
       startY: 0,
-      height: 1080,
-      width: 2880,
+      height: 1000,
+      width: 2800,
       offsetX: 0,
       offsetY: 0,
       timer: null,
@@ -101,7 +103,6 @@ export default {
       this.multiIndex = e.target.value;
       this.drawWidth = this.multiArray[0][this.multiIndex[0]];
       this.color = this.colorArray[this.multiIndex[1]];
-      console.log(this.drawWidth, this.color);
     },
     getAuth() {
       wx.getSetting({
@@ -178,15 +179,10 @@ export default {
         });
         this.ctx.clearActions();
       } else if (this.chosen === "move") {
-        this.time++;
-        if (this.time == 6) {
-          this.offsetX += (e.touches[0].x - this.prevPosition[0]) * 2;
-          this.time = 0;
-        }
-        // this.offsetY += e.touches[0].y - this.prevPosition[1];
+        this.offsetX += (e.touches[0].x - this.prevPosition[0]);
         this.prevPosition = [
-          parseInt(e.touches[0].x),
-          parseInt(e.touches[0].y)
+          e.touches[0].x,
+          e.touches[0].y
         ];
       }
     },
@@ -351,7 +347,7 @@ page {
   .show {
     box-shadow: #aaa 0 0 10px;
     position: absolute;
-    z-index: 22222;
+    z-index: 1;
     border-radius: 4rpx;
     border-left: 1rpx solid #bfccdc;
     border-right: 1rpx solid #bfccdc;
@@ -371,6 +367,7 @@ page {
     bottom: 10rpx;
     z-index: 99999999;
     color: #bbb;
+
     .type {
       flex-direction: row;
       display: flex;
@@ -379,43 +376,19 @@ page {
       margin: 0 18rpx;
       height: 90rpx;
       width: 100rpx;
-      text-align: center; //   background: red;
-      // border: 1rpx solid #cccccc;
+      text-align: center;
+
       img {
         width: 50rpx;
         height: 50rpx;
       }
     }
+
     .chosen {
       border-color: #000;
       background-color: #3BACF9;
     }
   }
 
-  .tip {
-    width: 2880rpx;
-    background: #bfccdc;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    height: 130rpx;
-
-    p {
-      width: 750rpx;
-      height: 130rpx;
-      display: flex;
-      flex-direction: row;
-      line-height: 130rpx;
-      justify-content: center;
-      align-items: center;
-      img {
-        margin-left: 20rpx;
-        width: 40rpx;
-        height: 40rpx;
-      }
-    }
-
-  }
 }
 </style>
