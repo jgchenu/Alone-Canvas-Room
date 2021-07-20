@@ -20,17 +20,14 @@
    />
 
   <footer class="types">
-
     <picker mode="multiSelector" @change="bindMultiPickerChange" :value="multiIndex" :range="multiArray"  >
         <div class="picker type" :style="{'font-size':(computedDrawWidth)+'rpx','color':color}" style="border-radiu:50%;" >
             ●
         </div>
     </picker>
-
     <div v-for="(item,index) in types" :key="index" :class="{chosen:item==chosen}" class="type" @click="choseType(index)">
       <img :src="typeImageMap[item]" :alt="item">
     </div>
-
   </footer>
 </div>
 </template>
@@ -40,15 +37,19 @@ import util from '@/utils/index.js'
 
 export default {
   mounted() {
-    //调用监听服务器返回
     this.ctx = wx.createContext();
     //初始化画布背景色
     this.setBg();
     this.ctx.setStrokeStyle(this.color);
     this.ctx.setLineWidth(2);
     this.ctx.setLineCap("round"); // 让线条圆润
-    this.height = wx.getSystemInfoSync().windowHeight * 2 - 300,
-    this.width = wx.getSystemInfoSync().windowWidth * 4
+    const info = wx.getSystemInfoSync();
+    console.log(info)
+    const isPad = /ipad/ig.test(info.model)
+    const percent =  isPad ? 1 : info.pixelRatio || info.devicePixelRatio || 1 ;
+    const footerHeight = isPad ? 200 : 150;
+    this.height = (info.windowHeight  - footerHeight) *  percent,
+    this.width = info.windowWidth * 4
   },
   onLoad(option) {
   },
@@ -363,10 +364,12 @@ page {
     position: absolute;
     display: flex;
     flex-direction: row;
+    align-items: center;
     left: 0;
     bottom: 10rpx;
     z-index: 99999999;
     color: #bbb;
+    height: 80rpx;
 
     .type {
       flex-direction: row;
@@ -374,7 +377,7 @@ page {
       align-items: center;
       justify-content: center;
       margin: 0 18rpx;
-      height: 90rpx;
+      height: 100%;
       width: 100rpx;
       text-align: center;
 
